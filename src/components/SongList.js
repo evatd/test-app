@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 // to create an instance of connect component
 import { connect } from "react-redux";
-// importing a plain old JS function, 
+// importing a plain old JS function,
 // it gets called and we return an object
 import { selectSong } from "./../actions";
+import SongDetail from "./SongDetail";
 
 class SongList extends Component {
   renderList = () =>
@@ -17,7 +18,14 @@ class SongList extends Component {
       </div>
     ));
   render() {
-    return <div>{this.renderList()}</div>;
+    return (
+      <div>
+        {this.renderList()}
+        <div>
+          <SongDetail />
+        </div>
+      </div>
+    );
   }
 }
 

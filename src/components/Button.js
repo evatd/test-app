@@ -13,7 +13,8 @@ class Button extends Component {
   render() {
     // Prints the default value 'english'
     console.log(this.context)
-    return <button>Submit</button>;
+    const text = this.context === 'english' ? 'Submit': "Voorleggen"
+    return <button>{text}</button>;
   }
 }
 

@@ -2,19 +2,23 @@ import React, { Component } from "react";
 import LanguageContext from "../contexts/LanguageContext";
 
 // On the receiving / component end
-// 1. set up contextType property
-// 2. access the data via this.context
-
-// When we use this property, we're adding this property directly to the comp 
-// so you 1. can declare contextType as a static property inside of a class
-// 2. Button.contextType = LanguageContext
 class Button extends Component {
-  static contextType = LanguageContext
+  // not needed when using Provider - only to access data via this.context
+  // static contextType = LanguageContext
+
+  renderSubmit = value => (value === "english" ? "Submit" : "Voorleegen");
   render() {
-    // Prints the default value 'english'
-    console.log(this.context)
-    const text = this.context === 'english' ? 'Submit': "Voorleggen"
-    return <button>{text}</button>;
+    // we're providing a function as a child to the component
+    // this child is called with whatever value is in the pipe (Consumer) -
+    // see value in Provider: value={this.state.language}
+    // wrap this consumer logic in the desired HTML element = button
+    return (
+      <button>
+        <LanguageContext.Consumer>
+          {value => this.renderSubmit(value)}
+        </LanguageContext.Consumer>
+      </button>
+    );
   }
 }
 

@@ -10,6 +10,18 @@ class Button extends Component {
   // static contextType = LanguageContext
 
   renderSubmit = value => (value === "english" ? "Submit" : "Voorleegen");
+
+  renderButton = color => (
+    <button
+      css={`
+        color: ${color};
+      `}
+    >
+      <LanguageContext.Consumer>
+        {value => this.renderSubmit(value)}
+      </LanguageContext.Consumer>
+    </button>
+  );
   render() {
     // We're providing a function as a child to the component
     // this child is called with whatever value is in the pipe (Consumer) -
@@ -18,17 +30,7 @@ class Button extends Component {
     // Note how you can call this prop color if you want - or value - up to you
     return (
       <ColorContext.Consumer>
-        {color => (
-          <button
-            css={`
-              color: ${color};
-            `}
-          >
-            <LanguageContext.Consumer>
-              {value => this.renderSubmit(value)}
-            </LanguageContext.Consumer>
-          </button>
-        )}
+        {color => this.renderButton(color)}
       </ColorContext.Consumer>
     );
   }

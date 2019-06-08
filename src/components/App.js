@@ -1,18 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
+import List from "./List";
+import { createList } from "../actions";
 
-const App = ({ lists }) => {
+const App = ({ lists, createList }) => {
   return (
     <div style={{ margin: 0, padding: 0 }}>
-      <ul>
-        {lists.map((list, id) => (
-          <li key={id}>
-            <h1>{list.title}</h1>
-            <div>Dummy Card</div>
-            <input />
-          </li>
-        ))}
-      </ul>
+      {lists.map(list => (
+        <ul id={list.id}>
+          <List list={list} createList={createList} />
+        </ul>
+      ))}
     </div>
   );
 };
@@ -21,4 +19,7 @@ const mapStateToProps = state => {
   console.log(state);
   return { lists: state.lists };
 };
-export default connect(mapStateToProps)(App);
+export default connect(
+  mapStateToProps,
+  { createList }
+)(App);

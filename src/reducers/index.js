@@ -35,11 +35,18 @@ const initList = [
   }
 ];
 
-const listsReducer = (list = initList, action) => {
+let ListId = 3;
+const listsReducer = (state = initList, action) => {
   if (action.type === "CREATE_LIST") {
-    return action.payload;
+    const newList = {
+      id: ListId,
+      title: action.payload.title,
+      cards: []
+    };
+    ListId += 1;
+    return [...state, newList];
   }
-  return list;
+  return state;
 };
 
 export default combineReducers({ lists: listsReducer });

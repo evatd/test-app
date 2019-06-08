@@ -7,36 +7,35 @@ class List extends Component {
 
   onInputChange = event => this.setState({ text: event.target.value });
 
+  handleAddCard = () => {
+    const { dispatch } = this.props;
+    if (this.state.text) {
+      this.setState({
+        text: ""
+      });
+      dispatch(createList(this.state.text));
+    }
+  };
+
   render() {
     // list has access to store props as parent App is connected
-    console.log("list", this.state.text, this.props);
+    console.log("list", this.props);
     return (
-      <li key={this.props.list.id}>
-        <h1>{this.props.list.title}</h1>
+      <div>
+        <h1>{this.props.title}</h1>
         <div>Dummy Card</div>
         <form>
           <input
             onChange={this.onInputChange}
-            text={this.state.text}
+            value={this.state.text}
             placeholder="Add Title"
+            autoFocus
           />
-          <button onClick={() => this.props.createList(this.state.text)}>
-            Create List
-          </button>
+          <button onClick={this.handleAddCard}>Create List</button>
         </form>
-      </li>
+      </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  // createList won't be visible here as
-  // props include store (data) and ACs (not in store)
-  console.log("list state", state);
-  return { lists: state.lists };
-};
-
-export default connect(
-  mapStateToProps,
-  { createList }
-)(List);
+export default connect()(List);

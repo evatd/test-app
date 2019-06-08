@@ -37,16 +37,23 @@ const initList = [
 
 let ListId = 3;
 const listsReducer = (state = initList, action) => {
-  if (action.type === "CREATE_LIST") {
-    const newList = {
-      id: ListId,
-      title: action.payload.title,
-      cards: []
-    };
-    ListId += 1;
-    return [...state, newList];
+  switch (action.type) {
+    // A new list starts with an empty cards array
+    // increment a list id by one, so it's unique
+    // spead our current lists (initial data) and add new lists
+    case "CREATE_LIST": {
+      const { title } = action.payload;
+      const newList = {
+        title,
+        id: ListId,
+        cards: []
+      };
+      ListId += 1;
+      return [...state, newList];
+    }
+    default:
+      return state;
   }
-  return state;
 };
 
 export default combineReducers({ lists: listsReducer });

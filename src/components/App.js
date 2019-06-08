@@ -1,13 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 
-const App = props => {
-  console.log(props.lists);
+const App = ({ lists }) => {
   return (
     <div style={{ margin: 0, padding: 0 }}>
       <ul>
-        {props.lists.map((list, id) => (
-          <li key={id}>{list.title}</li>
+        {lists.map((list, id) => (
+          <li key={id}>
+            <h1>{list.title}</h1>
+            <div>Dummy Card</div>
+            <input />
+          </li>
         ))}
       </ul>
     </div>

@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import List from "./List";
+import ActionButton from "./ActionButton";
 
 const App = ({ lists }) => {
   return (
-    <div style={{ margin: 0, padding: 0 }}>
-      {lists.map(list => (
-        <List key={list.id} title={list.title} />
-      ))}
+    <div>
+      {lists &&
+        lists.map(list => <List title={list.title} cards={list.cards} />)}
+      <ActionButton />
     </div>
   );
 };

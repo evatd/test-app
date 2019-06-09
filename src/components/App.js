@@ -13,8 +13,6 @@ const App = ({ lists }) => {
   );
 };
 
-const mapStateToProps = state => {
-  console.log(state);
-  return { lists: state.lists };
-};
+const mapStateToProps = state => ({ lists: state.lists });
+
 export default connect(mapStateToProps)(App);
